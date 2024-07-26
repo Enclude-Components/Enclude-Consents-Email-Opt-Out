@@ -14,7 +14,7 @@ Adds a rollup field to Consent Profile called `Email Opt Out`. This field counts
 
 It also includes a flow `Consent Profile On Insert Update Email Opt Out` which syncs the standard Contact `Email Opt Out` field with the one on Consent Profile.
 
-This add-on can also be used as a general example for how to create Consent Profile rollups and record-triggered flows.
+This add-on can also be used as a general example for how to create Consent Profile rollups and record-triggered flows for those fields.
 
 ## Contents
 
