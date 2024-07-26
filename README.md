@@ -1,12 +1,25 @@
 # Enclude-Consents-Email-Opt-Out
 
-Add a brief description of this project here, in Markdown format.
-It will be shown on the main page of the project's GitHub repository.
+An optional add-on to the [Enclude Consents](https://github.com/EncludeLtd/Consents) package. Ensure the Enclude Consents package is installed before attempting to install this add-on.
 
-## Development
+## Deploy
 
-To work on this project in a scratch org:
+<a href="https://github.com/Enclude-Components/Enclude-Consents-Email-Opt-Out/releases/latest">
+  <img alt="Install Latest Release"
+       src="https://img.shields.io/badge/Install%20Latest%20Release-238636?style=for-the-badge&logoColor=white&logo=DocuSign">
+</a>
 
-1. [Set up CumulusCI](https://cumulusci.readthedocs.io/en/latest/tutorial.html)
-2. Run `cci flow run dev_org --org dev` to deploy this project.
-3. Run `cci org browser dev` to open the org in your browser.
+## Description
+Adds a rollup field to Consent Profile called `Email Opt Out`. This field counts the number of Consent Assignment records where the "Email" Consent Type has been "Denied". The "Email" Consent Type record has not been included in this add-on, and must be created manually. If you wish to name your Consent Type record something other than "Email," the rollup field must be modified.
+
+It also includes a flow `Consent Profile On Insert Update Email Opt Out` which syncs the standard Contact `Email Opt Out` field with the one on Consent Profile.
+
+This add-on can also be used as a general example for how to create Consent Profile rollups and record-triggered flows for those fields.
+
+## Contents
+
+- Flows
+    - Consent Profile On Insert Update Email Opt Out
+- Custom Fields
+    - Consent Profile
+        - Email Opt Out

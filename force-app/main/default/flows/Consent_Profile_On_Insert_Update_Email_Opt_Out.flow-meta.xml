@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>61.0</apiVersion>
+    <description>When Consent Profile Email Opt Out field changes, update related contacts Email Opt Out field accordingly</description>
+    <environments>Default</environments>
+    <formulas>
+        <name>HasOptedOut</name>
+        <dataType>Boolean</dataType>
+        <expression>{!$Record.Email_Opt_Out__c} &gt; 0</expression>
+    </formulas>
+    <interviewLabel>Consent Profile On Insert Update - Email Opt Out {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Consent Profile On Insert Update - Email Opt Out</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordUpdates>
+        <description>Update Email Opt Out field of Contacts whose Consent Profile looks up to this record</description>
+        <name>Update_Related_Contacts_Email_Opt_Out</name>
+        <label>Update Related Contacts Email Opt Out</label>
+        <locationX>176</locationX>
+        <locationY>323</locationY>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>enc_con__Consent_Profile__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>HasOptedOutOfEmail</field>
+            <value>
+                <elementReference>HasOptedOut</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Contact</object>
+    </recordUpdates>
+    <start>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Update_Related_Contacts_Email_Opt_Out</targetReference>
+        </connector>
+        <filterFormula>ISCHANGED({!$Record.Email_Opt_Out__c})</filterFormula>
+        <object>enc_con__Consent_Profile__c</object>
+        <recordTriggerType>CreateAndUpdate</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Active</status>
+</Flow>
